@@ -5,6 +5,7 @@
     <p class="subtitle">
       {{ dataPoint }}
     </p>
+    <!-- <div class="buttons" @click="runModel()"> -->
     <div class="buttons" @click="loadNewImage()">
     <button>
       Run Model
