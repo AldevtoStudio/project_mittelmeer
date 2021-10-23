@@ -5,7 +5,7 @@
     <p class="subtitle">
       {{ dataPoint }}
     </p>
-    <div class="buttons" @click="runModel()">
+    <div class="buttons" @click="loadNewImage()">
     <button>
       Run Model
     </button>
@@ -22,8 +22,8 @@ export default {
   
   data() {
     return {
-      dataPoint: 'Asís, I Love You',
-      image : dummy.jojo
+      dataPoint: 'Asís, I ⛳️ You',
+      image : '/pareto-6-2.jpeg'
       }
   },
 
@@ -62,10 +62,8 @@ export default {
       
     },
 
-    upload64Image() {
-      const newPath = '/Users/aya/Desktop/64nits_image_test.json'
-
-    this.image = newPath
+    async loadNewImage () {
+    this.image = dummy.jojo
     },
   }
 }
