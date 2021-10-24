@@ -1,3 +1,25 @@
+/* 
+Js
+- encrypting token
+- default image?
+- download only possible when image alrady generated
+- download
+- link to website subpage: info
+
+Css:
+- responsive
+- bg
+- button
+- crop?
+
+General
+- Credits Runway ML
+- Hosting
+- QR
+- infopage website
+
+ */
+
 <template>
   <div class="container">
     <br>
@@ -5,12 +27,33 @@
     <p class="subtitle">
       {{ dataPoint }}
     </p>
+
+    <!-- #### alte Button Version (mit Run Model Method und) ohne "Hiding" ### -->
     <!-- <div class="buttons" @click="runModel()"> -->
-    <div class="buttons" @click="loadNewImage()">
+   <!--  <div class="buttons" @click="loadNewImage()">
     <button>
       Run Model
     </button>
+    </div> -->
+
+    <div class="buttons" @click="loadNewImage()">
+    <button id="btn" @click="hideBtn(), showBtn()">
+      Run Model
+    </button>
     </div>
+
+    <div class="buttons" @click="downloadLandscape()">
+    <!-- <button id="btnDownload" style="visibility:hidden"> -->
+    <a id="btnDownload" style="visibility:hidden" href="/pareto-6-2.jpeg" download="yourbackdrop.jpg">take it home</a>
+    </div>
+
+   <!--  <div class="post">
+      <nuxt-img :src="image" title="your individual background" class=center />  
+      <div class="post-s">
+        <a href="/pareto-6-2.jpeg" download="yourbackdrop.jpg">take it home</a>
+      </div>
+    </div> -->
+
   </div>
 </template>
 
@@ -20,7 +63,7 @@ import dummy from "~/static/dummy_image.json"
 
 export default {
   name: 'HomePage',
-  
+
   data() {
     return {
       dataPoint: 'Asís, I ⛳️ You',
@@ -56,21 +99,70 @@ export default {
         console.log("model runed") // FOR TESTING ONLY
         // replace image from data object
         this.image = modelImage.image
-        })
-
-
-
-      
+        })      
     },
 
     async loadNewImage () {
     this.image = dummy.jojo
     },
+
+    hideBtn(){
+      document.getElementById('btn').style.visibility = 'hidden';
+    },
+
+    showBtn(){
+      document.getElementById('btnDownload').style.visibility = 'visible';
+    },
+
+    downloadLandscape(){
+
+    }
+
   }
 }
 </script>
 
 <style>
+
+.post {
+ 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 84%;
+  position: relative;
+  cursor: pointer;
+}
+
+.post:hover .post-s {
+  width: 1200px;
+
+}
+
+.post img {
+  display: block;
+  width: 1200px;
+  height: 750px;
+
+}
+.post-s {
+  width: 0;
+  height: 750px;
+  background: rgba(12, 16, 241, 0.358);
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: 1s ease;
+
+}
+.post-s h2 {
+  color:white;
+  font-size: 20px;
+  padding: 8px 20px;
+}
 
 .logo {
   max-width: 300px;
