@@ -1,11 +1,6 @@
 /* 
 Js
 - default image?
-- link to website subpage: info
-
-Css:
-- responsive
-- crop?
 
 General
 - Credits Runway ML
@@ -21,12 +16,13 @@ General
 
 <body>
   <div>
-    <p id="warning" class="subtitle">
-      💤💤💤 <br> The model might be asleep, <br> it can take a few seconds to run. <br> 💤💤💤
+    <p id="intro" class="subtitle">
+      A unique landscape, an ideal background can be generated for you.
+    <br>
     </p>
   </div>
   <div class="container">
-    <nuxt-img :src="image" sizes="sm:100vw md:50vw lg:400px"/>
+    <nuxt-img :src="image" sizes="sm:100vw md:50vw lg:200px"/>
     <!-- <p class="subtitle">
       {{ dataPoint }}
     </p> -->
@@ -40,9 +36,9 @@ General
     </button>
     </div> -->
 
-    <div class="buttons" @click="loadNewImage()">
+    <div class="buttons" @click="runModel()">
     <button class="ontopbtn" id="btn" @click="hideBtn(), showBtn()">
-      generate unique landscape for me
+      generate
     </button>
     </div>
 
@@ -52,6 +48,16 @@ General
     <!-- <a id="btnDownload" style="visibility:hidden" href="/pareto-6-2.jpeg" download="yourbackdrop.jpg">take it home</a> -->
       </button>
     </div>
+
+  <div>
+    <p id="warning" class="subtitle">
+      💤💤💤 <br> The model might be asleep, <br> it can take a few seconds to run. <br> 💤💤💤
+    </p>
+  </div>
+
+  <div class="infolink">
+    <a href="http://start.johannamichel.com/remoteness-insularity-difficult-topography/">info</a>
+  </div>
 
    <!--  <div class="post">
       <nuxt-img :src="image" title="your individual background" class=center />  
@@ -79,16 +85,14 @@ export default {
       image : dummy.default,
       rurl: runway.url,
       rtoken: runway.token,
-      title: 'remoteness - generating landscapes',
+      title: 'remoteness - generator',
       }
   },
   head() {
       return {
         title: this.title,
         meta: [
-          // hid is used as unique identifier. Do not use `vmid` for it as it will not work
           {
-            hid: 'description',
             content: 'My custom description',
             name: 'viewport',
             content: 'width=device-width initial-scale=1'
@@ -99,7 +103,7 @@ export default {
 
   methods: {
     // Call Model and replace image
-    async runModel () {
+    async runModel() {
       console.log("fetching model") // FOR TESTING ONLY
 
 
@@ -134,6 +138,7 @@ export default {
 
     hideBtn(){
       document.getElementById('btn').style.visibility = 'hidden';
+      document.getElementById('intro').style.visibility = 'hidden';
       document.getElementById('warning').style.visibility = 'hidden';
     },
 
@@ -174,7 +179,9 @@ nuxt-img {
 /* Make the image responsive */
 .container img {
   width: 100%;
+  max-width: 100%;
   height: auto;
+  padding: 3vw 0 0 0;
 }
 
 .container .ontopbtn {
@@ -183,20 +190,21 @@ nuxt-img {
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  background-color: #fff;
-  color: rgb(78, 78, 78);
-  font-size: 5vw;
-  font-family:'Helvetica Neue';
+  background-color: #B5D5D8;
+  color: black;
+  font-size: clamp(16px, 3vw, 22px);
+  font-style: italic;
+  text-decoration: underline;
+  font-family: "Times New Roman", Times, serif;
   opacity: .5;
-  padding: 12vw 29vw;
+  padding: 2vw 4vw;
   border: none;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: 1px;
 }
 
 .container .ontopbtn:hover {
-  background-color: #B5D5D8;
-  color: black;
+  background-color: #fff;
 }
 
 .title {
@@ -217,11 +225,18 @@ nuxt-img {
   letter-spacing: 1px;
 }
 
+.infolink {
+  padding: 3vw 0 0 0;
+  text-align: right; 
+  color: red;
+  font-size: clamp(16px, 3vw, 22px);
+}
+
 .subtitle {
   margin: 0;
   padding: 2vw 2vw;
   color: black;
-  font-size: 5vw;
+  font-size: clamp(16px, 3vw, 22px);
   text-align: center;
   /* text-shadow: 3px 3px 1px black; */
 }
