@@ -79,7 +79,7 @@ export default {
       image : '/Users/pears/Documents/repos/project_mittelmeer/static/pareto-6-2.jpeg',
       rurl: runway.url,
       rtoken: runway.token,
-      title: 'remmoteness - generating landscapes',
+      title: 'remoteness - generating landscapes',
       }
   },
   head() {
