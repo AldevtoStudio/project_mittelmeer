@@ -18,9 +18,15 @@ General
  */
 
 <template>
-<body onload="foo()">
+
+<body>
+  <div>
+    <p id="warning" class="subtitle">
+      it might take a few seconds awakening the model
+    </p>
+  </div>
   <div class="container">
-    <nuxt-img :src="image" sizes="sm:100vw md:50vw lg:400px" />
+    <nuxt-img :src="image" sizes="sm:100vw md:50vw lg:400px"/>
     <!-- <p class="subtitle">
       {{ dataPoint }}
     </p> -->
@@ -36,13 +42,13 @@ General
 
     <div class="buttons" @click="loadNewImage()">
     <button class="ontopbtn" id="btn" @click="hideBtn(), showBtn()">
-      Run Model
+      generate unique landscape for me
     </button>
     </div>
 
     <div class="buttons" @click="downloadLandscape()">
       <button class="ontopbtn" id="btnDownload" style="visibility:hidden"> 
-        Download
+        download
     <!-- <a id="btnDownload" style="visibility:hidden" href="/pareto-6-2.jpeg" download="yourbackdrop.jpg">take it home</a> -->
       </button>
     </div>
@@ -65,7 +71,7 @@ import runway from "~/static/runway.json"
 import { saveAs } from 'file-saver'
 
 export default {
-  name: 'HomePage',
+  name: 'remoteness',
 
   data() {
     return {
@@ -73,8 +79,23 @@ export default {
       image : '/Users/pears/Documents/repos/project_mittelmeer/static/pareto-6-2.jpeg',
       rurl: runway.url,
       rtoken: runway.token,
+      title: 'remmoteness - generating landscapes',
       }
   },
+  head() {
+      return {
+        title: this.title,
+        meta: [
+          // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+          {
+            hid: 'description',
+            content: 'My custom description',
+            name: 'viewport',
+            content: 'width=device-width initial-scale=1'
+          }
+        ]
+      }
+    },
 
   methods: {
     // Call Model and replace image
@@ -111,12 +132,9 @@ export default {
     this.image = dummy.jojo
     },
 
-    async foo(){
-    this.image = dummy.jojo
-    },
-
     hideBtn(){
       document.getElementById('btn').style.visibility = 'hidden';
+      document.getElementById('warning').style.visibility = 'hidden';
     },
 
     showBtn(){
@@ -138,7 +156,7 @@ html {
   background-image: linear-gradient(to right, #FED2CF, #fff, #B5D5D8);
 }
 body {
-  padding: 20px 20px;
+  padding: 2vw 2vw;
 }
 
 nuxt-img {
@@ -150,6 +168,7 @@ nuxt-img {
 .container {
   position: relative;
   width: 100%;
+  border: black;
 }
 
 /* Make the image responsive */
@@ -166,9 +185,10 @@ nuxt-img {
   -ms-transform: translate(-50%, -50%);
   background-color: #fff;
   color: rgb(78, 78, 78);
-  font-size: 10px;
+  font-size: 5vw;
+  font-family:'Helvetica Neue';
   opacity: .5;
-  padding: 120px 240px;
+  padding: 12vw 29vw;
   border: none;
   cursor: pointer;
   border-radius: 3px;
@@ -199,9 +219,11 @@ nuxt-img {
 
 .subtitle {
   margin: 0;
-  padding: 20px 0;
+  padding: 2vw 2vw;
   color: black;
-  text-shadow: 3px 3px 1px black;
+  font-size: 5vw;
+  text-align: center;
+  /* text-shadow: 3px 3px 1px black; */
 }
 
 </style>
