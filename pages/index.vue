@@ -22,7 +22,7 @@ General
 <body>
   <div>
     <p id="warning" class="subtitle">
-      it might take a few seconds awakening the model
+      💤💤💤 <br> The model might be asleep, <br> it can take a few seconds to run. <br> 💤💤💤
     </p>
   </div>
   <div class="container">
@@ -76,7 +76,7 @@ export default {
   data() {
     return {
       dataPoint: 'Asís, I ⛳️ You',
-      image : '/Users/pears/Documents/repos/project_mittelmeer/static/pareto-6-2.jpeg',
+      image : dummy.default,
       rurl: runway.url,
       rtoken: runway.token,
       title: 'remoteness - generating landscapes',

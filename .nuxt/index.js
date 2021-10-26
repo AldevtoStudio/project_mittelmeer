@@ -12,9 +12,9 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_6c3b30fa from 'nuxt_plugin_plugin_6c3b30fa' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_oruga_5ec5cc83 from 'nuxt_plugin_oruga_5ec5cc83' // Source: ./oruga.js (mode: 'all')
-import nuxt_plugin_image_763f07d8 from 'nuxt_plugin_image_763f07d8' // Source: ./image.js (mode: 'all')
+import nuxt_plugin_plugin_552f0542 from 'nuxt_plugin_plugin_552f0542' // Source: ./components/plugin.js (mode: 'all')
+import nuxt_plugin_oruga_0938cc5f from 'nuxt_plugin_oruga_0938cc5f' // Source: ./oruga.js (mode: 'all')
+import nuxt_plugin_image_6f537bf0 from 'nuxt_plugin_image_6f537bf0' // Source: ./image.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -178,16 +178,16 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_6c3b30fa === 'function') {
-    await nuxt_plugin_plugin_6c3b30fa(app.context, inject)
+  if (typeof nuxt_plugin_plugin_552f0542 === 'function') {
+    await nuxt_plugin_plugin_552f0542(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_oruga_5ec5cc83 === 'function') {
-    await nuxt_plugin_oruga_5ec5cc83(app.context, inject)
+  if (typeof nuxt_plugin_oruga_0938cc5f === 'function') {
+    await nuxt_plugin_oruga_0938cc5f(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_image_763f07d8 === 'function') {
-    await nuxt_plugin_image_763f07d8(app.context, inject)
+  if (typeof nuxt_plugin_image_6f537bf0 === 'function') {
+    await nuxt_plugin_image_6f537bf0(app.context, inject)
   }
 
   // Lock enablePreview in context
