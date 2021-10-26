@@ -1,32 +1,30 @@
 /* 
 Js
-- encrypting token
 - default image?
-- download only possible when image alrady generated
-- download
 - link to website subpage: info
 
 Css:
 - responsive
-- bg
-- button
 - crop?
 
 General
 - Credits Runway ML
-- Hosting
+- Hosting: new domain
+    vuetify
 - QR
 - infopage website
+- icon
 
  */
 
 <template>
+<body onload="foo()">
   <div class="container">
-    <br>
     <nuxt-img :src="image" sizes="sm:100vw md:50vw lg:400px" />
-    <p class="subtitle">
+    <!-- <p class="subtitle">
       {{ dataPoint }}
-    </p>
+    </p> -->
+    
 
     <!-- #### alte Button Version (mit Run Model Method und) ohne "Hiding" ### -->
     <!-- <div class="buttons" @click="runModel()"> -->
@@ -37,14 +35,16 @@ General
     </div> -->
 
     <div class="buttons" @click="loadNewImage()">
-    <button id="btn" @click="hideBtn(), showBtn()">
+    <button class="ontopbtn" id="btn" @click="hideBtn(), showBtn()">
       Run Model
     </button>
     </div>
 
     <div class="buttons" @click="downloadLandscape()">
-    <!-- <button id="btnDownload" style="visibility:hidden"> -->
-    <a id="btnDownload" style="visibility:hidden" href="/pareto-6-2.jpeg" download="yourbackdrop.jpg">take it home</a>
+      <button class="ontopbtn" id="btnDownload" style="visibility:hidden"> 
+        Download
+    <!-- <a id="btnDownload" style="visibility:hidden" href="/pareto-6-2.jpeg" download="yourbackdrop.jpg">take it home</a> -->
+      </button>
     </div>
 
    <!--  <div class="post">
@@ -55,11 +55,14 @@ General
     </div> -->
 
   </div>
+</body>
 </template>
 
 <script>
 import unirand from "unirand"
 import dummy from "~/static/dummy_image.json"
+import runway from "~/static/runway.json"
+import { saveAs } from 'file-saver'
 
 export default {
   name: 'HomePage',
@@ -67,7 +70,9 @@ export default {
   data() {
     return {
       dataPoint: 'Asís, I ⛳️ You',
-      image : '/pareto-6-2.jpeg'
+      image : '/Users/pears/Documents/repos/project_mittelmeer/static/pareto-6-2.jpeg',
+      rurl: runway.url,
+      rtoken: runway.token,
       }
   },
 
@@ -85,8 +90,8 @@ export default {
       const { HostedModel } = require('@runwayml/hosted-models')
       // model authentication
       const model = new HostedModel({
-        url: "https://landscapes-favourite-backgrounds-51351e12.hosted-models.runwayml.cloud/v1/",
-        token: "Sd04VQa2+dmmNSq0RCxFQQ=="}) // DANGER !! - Needs to be encripted
+        url: this.rurl,
+        token: this.rtoken}) // DANGER !! - Needs to be encripted
       // create input object for model
       const inputs = {
         "z": randomArray, 
@@ -102,7 +107,11 @@ export default {
         })      
     },
 
-    async loadNewImage () {
+    async loadNewImage() {
+    this.image = dummy.jojo
+    },
+
+    async foo(){
     this.image = dummy.jojo
     },
 
@@ -115,6 +124,7 @@ export default {
     },
 
     downloadLandscape(){
+      saveAs(this.image, "mybackdrop.jpg")
 
     }
 
@@ -124,62 +134,49 @@ export default {
 
 <style>
 
-.post {
- 
+html {
+  background-image: linear-gradient(to right, #FED2CF, #fff, #B5D5D8);
+}
+body {
+  padding: 20px 20px;
+}
+
+nuxt-img {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 84%;
-  position: relative;
-  cursor: pointer;
-}
-
-.post:hover .post-s {
-  width: 1200px;
-
-}
-
-.post img {
-  display: block;
-  width: 1200px;
-  height: 750px;
-
-}
-.post-s {
-  width: 0;
-  height: 750px;
-  background: rgba(12, 16, 241, 0.358);
-  position: absolute;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  transition: 1s ease;
-
-}
-.post-s h2 {
-  color:white;
-  font-size: 20px;
-  padding: 8px 20px;
-}
-
-.logo {
-  max-width: 300px;
-}
-
-.o-button {
-  padding: 10px 30px;
-}
-
-.container {
   margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  flex-direction: column;
+}
+
+/* Container needed to position the button. Adjust the width as needed */
+.container {
+  position: relative;
+  width: 100%;
+}
+
+/* Make the image responsive */
+.container img {
+  width: 100%;
+  height: auto;
+}
+
+.container .ontopbtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #fff;
+  color: rgb(78, 78, 78);
+  font-size: 10px;
+  opacity: .5;
+  padding: 120px 240px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.container .ontopbtn:hover {
+  background-color: #B5D5D8;
+  color: black;
 }
 
 .title {
@@ -201,11 +198,10 @@ export default {
 }
 
 .subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+  margin: 0;
+  padding: 20px 0;
+  color: black;
+  text-shadow: 3px 3px 1px black;
 }
 
 </style>
