@@ -23,6 +23,7 @@ General
   </div>
   <div class="container">
     <nuxt-img :src="image" sizes="sm:100vw md:50vw lg:200px"/>
+    <!-- <img src="project_mittelmeer/static/leer.png" /> -->
     <!-- <p class="subtitle">
       {{ dataPoint }}
     </p> -->
@@ -73,6 +74,7 @@ General
 <script>
 import unirand from "unirand"
 import dummy from "~/static/dummy_image.json"
+import dummy1 from "~/static/dummy_image1.json"
 import runway from "~/static/runway.json"
 import { saveAs } from 'file-saver'
 
@@ -81,8 +83,7 @@ export default {
 
   data() {
     return {
-      dataPoint: 'Asís, I ⛳️ You',
-      image : dummy.default,
+      image: dummy1.default,
       rurl: runway.url,
       rtoken: runway.token,
       title: 'remoteness - generator',
@@ -136,19 +137,29 @@ export default {
     this.image = dummy.jojo
     },
 
-    hideBtn(){
+   /*  async hide() {
       document.getElementById('btn').style.visibility = 'hidden';
       document.getElementById('intro').style.visibility = 'hidden';
       document.getElementById('warning').style.visibility = 'hidden';
+    }, */
+
+    hideBtn() {
+      
+      setTimeout(function() {document.getElementById('intro').style.visibility = 'hidden';}, 1000);
+      setTimeout(function() {document.getElementById('btn').style.visibility = 'hidden';}, 1000);
+      setTimeout(function() {document.getElementById('warning').style.visibility = 'hidden';}, 10000);
     },
 
     showBtn(){
-      document.getElementById('btnDownload').style.visibility = 'visible';
+      setTimeout(function() {document.getElementById('btnDownload').style.visibility = 'visible';}, 1500);
     },
 
     downloadLandscape(){
+      if (this.image === dummy1.default) {
+        alert("The model was asleep, it has not generated your landscape yet. Sometimes it can take a few seconds to run. . . . . If it takes too long, do not hesitate to refresh the page, try to wake it up again.");
+      } else {
       saveAs(this.image, "mybackdrop.jpg")
-
+      }
     }
 
   }
@@ -205,6 +216,12 @@ nuxt-img {
 
 .container .ontopbtn:hover {
   background-color: #fff;
+}
+
+.m-fadeOut {
+  visibility: hidden;
+ /*  opacity: 0;
+  transition: visibility 0s linear 300ms, opacity 300ms; */
 }
 
 .title {

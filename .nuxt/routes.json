@@ -3,7 +3,6 @@
     "name": "index",
     "path": "/",
     "component": "/Users/pears/Documents/repos/project_mittelmeer/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_5b74f3e5"
+    "chunkName": "pages/index"
   }
 ]
