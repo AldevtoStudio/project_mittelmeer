@@ -1,17 +1,3 @@
-/* 
-Js
-- default image?
-
-General
-- Credits Runway ML
-- Hosting: new domain
-    vuetify
-- QR
-- infopage website
-- icon
-
- */
-
 <template>
 
 <body>
@@ -20,7 +6,8 @@ General
       A unique landscape, an ideal background can be generated for you.
     <br>
     </p>
-  </div>
+</div> 
+ 
   <div class="container">
     <nuxt-img :src="image" sizes="sm:100vw md:50vw lg:200px"/>
     <!-- <img src="project_mittelmeer/static/leer.png" /> -->
@@ -156,9 +143,9 @@ export default {
 
     downloadLandscape(){
       if (this.image === dummy1.default) {
-        alert("The model was asleep, it has not generated your landscape yet. Sometimes it can take a few seconds to run. . . . . If it takes too long, do not hesitate to refresh the page, try to wake it up again.");
+        alert("The model has been asleep, it has not generated your landscape yet. Sometimes it can take up to 2 min. If it takes too long, just refresh the page in 2-5 min, when the model is awake. ⏰");
       } else {
-      saveAs(this.image, "mybackdrop.jpg")
+      saveAs(this.image, "my_remote_backdrop.jpg")
       }
     }
 
